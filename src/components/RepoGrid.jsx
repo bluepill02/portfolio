@@ -14,8 +14,9 @@ const RepoGrid = () => {
       try {
         const data = await fetchRepos();
 
+        const targetRepos = ['chenn-ai', 'cost-smart', 'lingualeap'];
         const processedRepos = data
-          .filter(repo => repo.name !== 'CHENN-AI')
+          .filter(repo => targetRepos.includes(repo.name))
           .map(repo => {
             const curated = projectData[repo.name];
             if (curated) {
