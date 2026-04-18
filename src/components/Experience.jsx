@@ -14,6 +14,16 @@ const experiences = [
     ],
   },
   {
+    date: 'Jan 2024 — Present',
+    role: 'Author & Digital Creator',
+    company: 'Published as B.P. Miller',
+    bullets: [
+      'Authored and formatted commercial-grade technical resources and e-books',
+      <span>Published developer-focused content and art books on <a href="https://www.amazon.com/stores/B.P.-Miller/author/B0GTPS4DMY" target="_blank" rel="noopener noreferrer" style={{color: '#00d4ff', textDecoration: 'none', borderBottom: '1px solid rgba(0, 212, 255, 0.3)'}}>Amazon</a></span>,
+      <span>Designed and distributed premium digital assets on <a href="https://bpmiller02.gumroad.com" target="_blank" rel="noopener noreferrer" style={{color: '#00d4ff', textDecoration: 'none', borderBottom: '1px solid rgba(0, 212, 255, 0.3)'}}>Gumroad</a></span>,
+    ],
+  },
+  {
     date: '2024 — Present',
     role: 'Data Science & AI (Ongoing)',
     company: 'DataCamp · Online',

@@ -11,7 +11,7 @@ export const projectData = {
         ],
         "priority": 1
     },
-    "chenn-ai": {
+    "CHENN-AI": {
         "customName": "Chennai Community App",
         "description": "A localized 'Tanglish' community platform built with Vite & Supabase. Features local jobs, events, and live data widgets with culturally relevant UX.",
         "techStack": ["React", "Supabase", "Vite", "Tailwind CSS"],

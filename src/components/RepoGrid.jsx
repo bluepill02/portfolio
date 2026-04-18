@@ -14,7 +14,7 @@ const RepoGrid = () => {
       try {
         const data = await fetchRepos();
 
-        const targetRepos = ['chenn-ai', 'cost-smart', 'lingualeap'];
+        const targetRepos = ['CHENN-AI', 'cost-smart', 'lingualeap'];
         const processedRepos = data
           .filter(repo => targetRepos.includes(repo.name))
           .map(repo => {
