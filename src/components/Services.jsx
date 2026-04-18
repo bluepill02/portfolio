@@ -1,37 +1,64 @@
-import React from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+
+const services = [
+  {
+    icon: '🚀',
+    title: 'MVP Development',
+    desc: 'Full products from concept to deployment. From exam prep tools to AI marketplaces — I turn your idea into shipped code.',
+  },
+  {
+    icon: '⚛️',
+    title: 'React & Next.js Apps',
+    desc: 'Full-stack with App Router, authentication, database integration. Modern, scalable web applications built right.',
+  },
+  {
+    icon: '🌏',
+    title: 'SEO & Localization',
+    desc: 'JSON-LD structured data, sitemaps, canonicals. Multilingual support and cultural UX built for real users.',
+  },
+  {
+    icon: '🔧',
+    title: 'Bug Fixes & Features',
+    desc: 'Quick turnaround on fixes, feature additions, and code optimization. Clean PRs, tested code, zero drama.',
+  },
+];
 
 const Services = () => {
-    return (
-        <section className="container" style={{ padding: '2rem 2rem' }}>
-            <h2 style={{ marginBottom: '2rem', fontSize: '1.5rem', borderLeft: '4px solid #e3b341', paddingLeft: '1rem' }}>
-                How I Can Help You
-            </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+  const [headerRef, headerVisible] = useScrollReveal();
 
-                <div className="glass-card" style={{ padding: '1.5rem', borderLeft: '1px solid var(--border-color)' }}>
-                    <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>🚀 MVP Development</h3>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                        I build full products, not just pages. From exam prep tools (LinguaLeap) to marketplaces (PromptPulse), I turn concepts into shipped code.
-                    </p>
-                </div>
+  return (
+    <section className="services-section" id="services">
+      <div className="container">
+        <div ref={headerRef} className={`reveal ${headerVisible ? 'revealed' : ''}`}>
+          <span className="section-label">// services</span>
+          <h2 className="section-title">How I Can Help</h2>
+          <p className="section-subtitle">
+            Whether it's a full product build or a quick feature, I deliver documented, tested, production-ready code.
+          </p>
+        </div>
 
-                <div className="glass-card" style={{ padding: '1.5rem', borderLeft: '1px solid var(--border-color)' }}>
-                    <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>⚛️ Next.js & Supabase</h3>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                        Full-stack capability with the App Router, authenticaton, and database integration. I build modern, scalable web applications.
-                    </p>
-                </div>
+        <div className="services-grid">
+          {services.map((s, i) => (
+            <ServiceCard key={i} {...s} delay={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
-                <div className="glass-card" style={{ padding: '1.5rem', borderLeft: '1px solid var(--border-color)' }}>
-                    <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>🌏 Localization & SEO</h3>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                        I build for real users, ensuring your site is found (SEO/JSON-LD) and accessible to diverse audiences (Localization/Neurodiversity).
-                    </p>
-                </div>
-
-            </div>
-        </section>
-    );
+const ServiceCard = ({ icon, title, desc, delay }) => {
+  const [ref, isVisible] = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`service-card reveal reveal-delay-${delay + 1} ${isVisible ? 'revealed' : ''}`}
+    >
+      <span className="service-icon">{icon}</span>
+      <h3>{title}</h3>
+      <p>{desc}</p>
+    </div>
+  );
 };
 
 export default Services;
