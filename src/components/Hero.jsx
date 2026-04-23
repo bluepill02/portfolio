@@ -1,49 +1,78 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+
+const roles = [
+  'Full Stack Developer',
+  'AI-Native Workflows',
+  'React Specialist',
+  'Node.js & Supabase',
+];
+
+const techs = [
+  'React', 'Next.js', 'TypeScript', 'JavaScript', 'Node.js', 'Express',
+  'PostgreSQL', 'Supabase', 'Firebase', 'Prisma', 'Vercel', 'Git',
+  'Tailwind CSS', 'Figma', 'Python', 'GitHub Copilot',
+];
 
 const Hero = () => {
-    const [loaded, setLoaded] = useState(false);
+  const [roleIndex, setRoleIndex] = useState(0);
 
-    useEffect(() => {
-        setLoaded(true);
-    }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex(prev => (prev + 1) % roles.length);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, []);
 
-    return (
-        <section className="hero-section" style={{ padding: '6rem 2rem', textAlign: 'center' }}>
-            <div className={`container ${loaded ? 'animate-fade-in' : ''}`} style={{ opacity: loaded ? 1 : 0, transition: 'opacity 1s ease' }}>
-                <h1 style={{ fontSize: '3rem', fontWeight: '700', marginBottom: '1rem' }}>
-                    Hello, I'm <span className="text-accent">bluepill02</span>.
-                </h1>
-                <p className="font-mono" style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 2rem' }}>
-                    Building type-safe web apps with React & TypeScript. I value clarity, clean code, and real-world results.
-                </p>
-                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                    <a href="https://github.com/bluepill02" target="_blank" rel="noreferrer"
-                        style={{
-                            padding: '0.8rem 1.5rem',
-                            background: 'var(--accent-color)',
-                            color: '#fff',
-                            textDecoration: 'none',
-                            borderRadius: '6px',
-                            fontWeight: '600'
-                        }}>
-                        View GitHub
-                    </a>
-                    <a href="https://www.datacamp.com/portfolio/smvinu69?view=true" target="_blank" rel="noreferrer"
-                        style={{
-                            padding: '0.8rem 1.5rem',
-                            background: 'transparent',
-                            color: 'var(--accent-color)',
-                            border: '2px solid var(--accent-color)',
-                            textDecoration: 'none',
-                            borderRadius: '6px',
-                            fontWeight: '600'
-                        }}>
-                        DataCamp Portfolio
-                    </a>
-                </div>
-            </div>
-        </section>
-    );
+  return (
+    <section className="hero" id="home">
+      {/* Background orbs */}
+      <div className="hero-orb hero-orb-1" aria-hidden="true"></div>
+      <div className="hero-orb hero-orb-2" aria-hidden="true"></div>
+      <div className="hero-orb hero-orb-3" aria-hidden="true"></div>
+
+      <div className="hero-content">
+        <p className="hero-handle hero-anim-1">@bluepill02</p>
+
+        <h1 className="hero-name hero-anim-2">
+          Vinusha{' '}
+          <span className="gradient-text">Srithar</span>
+        </h1>
+
+        <p className="hero-role hero-anim-3">
+          I build modern web apps with{' '}
+          <span key={roleIndex} className="role-word">
+            {roles[roleIndex]}
+          </span>
+        </p>
+
+        <div className="hero-ctas hero-anim-4">
+          <a href="#contact" className="btn-primary">
+            Start a Project →
+          </a>
+          <a href="#projects" className="btn-outline">
+            View My Work
+          </a>
+        </div>
+      </div>
+
+      {/* Tech ticker strip */}
+      <div className="ticker-section hero-anim-5">
+        <div className="ticker-track">
+          {[...techs, ...techs].map((tech, i) => (
+            <span key={i} className="ticker-item">
+              <span className="ticker-dot"></span>
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="hero-scroll-indicator" aria-hidden="true">
+        <span>scroll</span>
+        <span className="scroll-line"></span>
+      </div>
+    </section>
+  );
 };
 
 export default Hero;
