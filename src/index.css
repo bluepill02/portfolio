@@ -91,3 +91,12 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 12px;
 }
+
+.repo-card-hover {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.repo-card-hover:hover {
+  transform: translateY(-5px);
+}

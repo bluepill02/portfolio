@@ -3,9 +3,7 @@ import React from 'react';
 const RepoCard = ({ repo }) => {
     return (
         <a href={repo.html_url} target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className="glass-card" style={{ padding: '1.5rem', height: '100%', transition: 'transform 0.3s ease', cursor: 'pointer', display: 'flex', flexDirection: 'column' }}
-                onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
-                onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+            <div className="glass-card repo-card-hover" style={{ padding: '1.5rem', height: '100%', display: 'flex', flexDirection: 'column' }}>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                     <h3 style={{ fontSize: '1.2rem', fontWeight: '600', color: 'var(--accent-color)' }}>
