@@ -25,7 +25,7 @@ const RepoCard = ({ repo }) => {
                 {/* Curated Features Section */}
                 {repo.features && (
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem' }}>
-                        {repo.features.slice(0, 3).map((feature, idx) => (
+                        {repo.features.map((feature, idx) => (
                             <span key={idx} style={{ fontSize: '0.7rem', padding: '2px 6px', borderRadius: '4px', backgroundColor: 'rgba(88, 166, 255, 0.1)', color: 'var(--text-primary)', border: '1px solid rgba(88, 166, 255, 0.2)' }}>
                                 {feature}
                             </span>

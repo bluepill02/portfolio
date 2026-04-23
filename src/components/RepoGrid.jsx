@@ -21,7 +21,7 @@ const RepoGrid = () => {
                                 ...repo,
                                 description: curated.description,
                                 customName: curated.customName,
-                                features: curated.features,
+                                features: curated.features?.slice(0, 3),
                                 techStack: curated.techStack,
                                 priority: curated.priority,
                                 isCurated: true
