@@ -12,8 +12,7 @@ describe('github service', () => {
     });
 
     afterEach(() => {
-        consoleErrorMock?.mock?.restore();
-        consoleErrorMock = undefined;
+        consoleErrorMock.mock.restore();
     });
 
     test('fetchProfile caches results', async () => {
@@ -123,5 +122,30 @@ describe('github service', () => {
         assert.strictEqual(data1, null);
         assert.strictEqual(data2, null);
         assert.strictEqual(mockFetch.mock.callCount(), 1, 'Should cache null response');
+    });
+
+    test('fetchProfile returns fallback for concurrent rejected requests', async () => {
+        let resolveFetch;
+        const mockFetch = mock.fn(
+            () =>
+                new Promise((resolve) => {
+                    resolveFetch = resolve;
+                })
+        );
+        globalThis.fetch = mockFetch;
+
+        const firstCall = fetchProfile();
+        const secondCall = fetchProfile();
+        assert.strictEqual(mockFetch.mock.callCount(), 1, 'Should reuse in-flight request');
+
+        resolveFetch({
+            ok: false,
+            status: 500,
+            statusText: 'Internal Server Error'
+        });
+
+        const [firstResult, secondResult] = await Promise.all([firstCall, secondCall]);
+        assert.strictEqual(firstResult, null);
+        assert.strictEqual(secondResult, null);
     });
 });

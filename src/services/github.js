@@ -7,39 +7,16 @@ export const _clearCache = () => {
     cache = {};
 };
 
-export const fetchProfile = async () => {
-    if (Object.hasOwn(cache, BASE_URL)) {
-        return cache[BASE_URL];
+const fetchWithCache = async (url, fallbackValue, errorLabel) => {
+    if (!Object.hasOwn(cache, url)) {
+        cache[url] = (async () => {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch ${errorLabel}: ${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        })();
     }
-
-    cache[BASE_URL] = (async () => {
-        const response = await fetch(BASE_URL);
-        if (!response.ok) throw new Error('Failed to fetch profile');
-        return response.json();
-    })();
-
-    try {
-        const data = await cache[BASE_URL];
-        cache[BASE_URL] = data;
-        return data;
-    } catch (error) {
-        delete cache[BASE_URL];
-        console.error(error);
-        return null;
-    }
-};
-
-export const fetchRepos = async () => {
-    const url = `${BASE_URL}/repos?sort=updated&direction=desc&per_page=100`;
-    if (Object.hasOwn(cache, url)) {
-        return cache[url];
-    }
-
-    cache[url] = (async () => {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Failed to fetch repos');
-        return response.json();
-    })();
 
     try {
         const data = await cache[url];
@@ -48,6 +25,13 @@ export const fetchRepos = async () => {
     } catch (error) {
         delete cache[url];
         console.error(error);
-        return [];
+        return fallbackValue;
     }
+};
+
+export const fetchProfile = async () => fetchWithCache(BASE_URL, null, 'profile');
+
+export const fetchRepos = async () => {
+    const url = `${BASE_URL}/repos?sort=updated&direction=desc&per_page=100`;
+    return fetchWithCache(url, [], 'repos');
 };
