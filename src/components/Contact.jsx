@@ -29,7 +29,7 @@ const Contact = () => {
                     </p>
                 </div>
 
-                <a href="mailto:bluepill02@example.com" // Ideally user provides email, using placeholder or repo issues for now
+                <a href="mailto:smvinu69@gmail.com"
                     style={{
                         display: 'inline-block',
                         padding: '1rem 2.5rem',
