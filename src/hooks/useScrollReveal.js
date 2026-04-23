@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const useScrollReveal = (options = {}) => {
+const DEFAULT_OPTIONS = Object.freeze({});
+
+export const useScrollReveal = (options = DEFAULT_OPTIONS) => {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -20,7 +22,7 @@ export const useScrollReveal = (options = {}) => {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [options]);
 
   return [ref, isVisible];
 };

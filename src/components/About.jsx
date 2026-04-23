@@ -1,5 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 const values = [
   {
@@ -36,7 +36,6 @@ const AnimatedCounter = ({ target, suffix, isVisible }) => {
 
   useEffect(() => {
     if (!isVisible) return;
-    let start = 0;
     const duration = 1800;
     let startTime = null;
 

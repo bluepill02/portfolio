@@ -19,7 +19,7 @@ const RepoCard = ({ repo }) => {
 
       {repo.features && (
         <div className="project-features">
-          {repo.features.slice(0, 4).map((feature, idx) => (
+          {repo.features.map((feature, idx) => (
             <span key={idx} className="project-feature-tag">
               {feature}
             </span>
