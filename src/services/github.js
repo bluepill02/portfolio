@@ -1,23 +1,37 @@
 const BASE_URL = 'https://api.github.com/users/bluepill02';
 
-export const fetchProfile = async () => {
+const cache = new Map();
+
+export const _clearCache = () => cache.clear();
+
+const fetchWithCache = async (url, fallbackValue, sanitizedMessage) => {
+    let request = cache.get(url);
+    if (!request) {
+        request = (async () => {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Failed request: ${response.status}`);
+            return response.json();
+        })();
+        cache.set(url, request);
+    }
+
     try {
-        const response = await fetch(BASE_URL);
-        if (!response.ok) throw new Error('Failed to fetch profile');
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        return null;
+        const data = await request;
+        cache.set(url, data);
+        return data;
+    } catch {
+        cache.delete(url);
+        console.error(sanitizedMessage);
+        return fallbackValue;
     }
 };
 
+export const fetchProfile = async () => fetchWithCache(BASE_URL, null, 'Error fetching profile');
+
 export const fetchRepos = async () => {
-    try {
-        const response = await fetch(`${BASE_URL}/repos?sort=updated&direction=desc&per_page=100`);
-        if (!response.ok) throw new Error('Failed to fetch repos');
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        return [];
-    }
+    return fetchWithCache(
+        `${BASE_URL}/repos?sort=updated&direction=desc&per_page=100`,
+        [],
+        'Error fetching repos'
+    );
 };
