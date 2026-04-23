@@ -6,7 +6,7 @@ export const fetchProfile = async () => {
         if (!response.ok) throw new Error('Failed to fetch profile');
         return await response.json();
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching profile');
         return null;
     }
 };
@@ -17,7 +17,7 @@ export const fetchRepos = async () => {
         if (!response.ok) throw new Error('Failed to fetch repos');
         return await response.json();
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching repositories');
         return [];
     }
 };
