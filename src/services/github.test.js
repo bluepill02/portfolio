@@ -30,6 +30,7 @@ describe('github service', () => {
 
         assert.strictEqual(result, null);
         assert.strictEqual(consoleError.mock.calls[0].arguments[0], 'Error fetching profile');
+        assert.strictEqual(consoleError.mock.calls[0].arguments.length, 1);
     });
 
     test('fetchRepos caches successful results', async () => {

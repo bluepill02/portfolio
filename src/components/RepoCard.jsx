@@ -19,8 +19,8 @@ const RepoCard = ({ repo }) => {
 
       {repo.features && (
         <div className="project-features">
-          {repo.features.map((feature, idx) => (
-            <span key={idx} className="project-feature-tag">
+          {repo.features.map((feature) => (
+            <span key={feature} className="project-feature-tag">
               {feature}
             </span>
           ))}
