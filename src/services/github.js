@@ -7,7 +7,7 @@ export const fetchProfile = async () => {
         return await response.json();
     } catch (error) {
         console.error(error);
-        return null;
+        return {};
     }
 };
 
