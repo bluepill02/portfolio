@@ -1,54 +1,58 @@
-import React from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Contact = () => {
-    return (
-        <section className="container" style={{ padding: '4rem 2rem 6rem' }}>
-            <div className="glass-card" style={{
-                padding: '3rem',
-                textAlign: 'center',
-                background: 'linear-gradient(145deg, rgba(22, 27, 34, 0.9), rgba(13, 17, 23, 0.95))',
-                border: '1px solid var(--accent-color)'
-            }}>
-                <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Let's Work Together</h2>
+  const [ref, isVisible] = useScrollReveal();
 
-                <div style={{ maxWidth: '700px', margin: '0 auto 2rem' }}>
-                    <h3 style={{ color: 'var(--accent-color)', marginBottom: '1rem', fontSize: '1.2rem' }}>
-                        MY "ZERO RISK" PROMISE
-                    </h3>
-                    <p style={{ fontSize: '1.1rem', color: 'var(--text-primary)', marginBottom: '1.5rem' }}>
-                        I know hiring a beginner feels risky. So let's remove the risk.
-                    </p>
-                    <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: '1.8' }}>
-                        1. We discuss your project <strong>(Text/Email only - I don't do calls)</strong>.<br />
-                        2. I build it.<br />
-                        3. You review it.<br />
-                        <strong style={{ color: 'var(--text-primary)' }}>4. You pay me what you honestly think the work is worth.</strong>
-                    </p>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '1rem', fontStyle: 'italic' }}>
-                        Does that sound fair?
-                    </p>
-                </div>
+  return (
+    <section className="contact-section" id="contact">
+      <div className="container">
+        <div ref={ref} className={`contact-card reveal ${isVisible ? 'revealed' : ''}`}>
+          <h2 className="contact-title">Let's Build Something Together</h2>
 
-                <a href="mailto:smvinu69@gmail.com"
-                    style={{
-                        display: 'inline-block',
-                        padding: '1rem 2.5rem',
-                        fontSize: '1.1rem',
-                        background: 'var(--accent-color)',
-                        color: '#fff',
-                        textDecoration: 'none',
-                        borderRadius: '50px',
-                        fontWeight: '700',
-                        boxShadow: '0 4px 14px 0 rgba(46, 160, 67, 0.39)'
-                    }}>
-                    Start a Project
-                </a>
-                <div style={{ marginTop: '2rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-                    (or reach out via <a href="https://github.com/bluepill02" style={{ color: 'var(--accent-color)' }}>GitHub</a>)
-                </div>
-            </div>
-        </section>
-    );
+          <div className="contact-promise">
+            <h3>The Zero Risk Promise</h3>
+            <ul className="contact-promise-steps">
+              <li>
+                <span className="step-number">1</span>
+                <span>We discuss your project <em>(text/email — I don't do calls)</em></span>
+              </li>
+              <li>
+                <span className="step-number">2</span>
+                <span>I build it</span>
+              </li>
+              <li>
+                <span className="step-number">3</span>
+                <span>You review it</span>
+              </li>
+              <li>
+                <span className="step-number">4</span>
+                <span className="step-highlight">You pay what you honestly think the work is worth</span>
+              </li>
+            </ul>
+          </div>
+
+          <a href="mailto:smvinu69@gmail.com" className="btn-primary" id="contact-cta">
+            Start a Project →
+          </a>
+
+          <div className="contact-channels">
+            <a href="mailto:smvinu69@gmail.com" className="contact-channel">
+              📧 smvinu69@gmail.com
+            </a>
+            <a href="https://github.com/bluepill02" target="_blank" rel="noreferrer" className="contact-channel">
+              🐙 GitHub
+            </a>
+            <a href="https://contra.com/bluepill02" target="_blank" rel="noreferrer" className="contact-channel">
+              💼 Contra
+            </a>
+            <a href="https://fiverr.com" target="_blank" rel="noreferrer" className="contact-channel">
+              🎯 Fiverr
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Contact;
