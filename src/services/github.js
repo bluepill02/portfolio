@@ -8,16 +8,22 @@ export const _clearCache = () => {
 };
 
 export const fetchProfile = async () => {
-    if (cache[BASE_URL]) {
+    if (Object.hasOwn(cache, BASE_URL)) {
         return cache[BASE_URL];
     }
-    try {
+
+    cache[BASE_URL] = (async () => {
         const response = await fetch(BASE_URL);
         if (!response.ok) throw new Error('Failed to fetch profile');
-        const data = await response.json();
+        return response.json();
+    })();
+
+    try {
+        const data = await cache[BASE_URL];
         cache[BASE_URL] = data;
         return data;
     } catch (error) {
+        delete cache[BASE_URL];
         console.error(error);
         return null;
     }
@@ -25,16 +31,22 @@ export const fetchProfile = async () => {
 
 export const fetchRepos = async () => {
     const url = `${BASE_URL}/repos?sort=updated&direction=desc&per_page=100`;
-    if (cache[url]) {
+    if (Object.hasOwn(cache, url)) {
         return cache[url];
     }
-    try {
+
+    cache[url] = (async () => {
         const response = await fetch(url);
         if (!response.ok) throw new Error('Failed to fetch repos');
-        const data = await response.json();
+        return response.json();
+    })();
+
+    try {
+        const data = await cache[url];
         cache[url] = data;
         return data;
     } catch (error) {
+        delete cache[url];
         console.error(error);
         return [];
     }
