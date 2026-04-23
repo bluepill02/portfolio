@@ -1,0 +1,5 @@
+🔒 Sanitize exception logging in GitHub service
+
+🎯 **What:** The raw error exception objects were being logged directly to the console (`console.error(error)`) in the `fetchProfile` and `fetchRepos` functions within `src/services/github.js`.
+⚠️ **Risk:** If left unfixed, raw exceptions could potentially leak sensitive environment details, network configurations, or internal application states to users via the browser console in a production environment.
+🛡️ **Solution:** Replaced `console.error(error)` with generic, sanitized static string messages (`console.error('Error fetching profile')` and `console.error('Error fetching repos')`). Added comprehensive tests to `src/services/github.test.js` to assert this correct logging behavior.
