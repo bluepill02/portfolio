@@ -19,13 +19,15 @@ const RepoCard = ({ repo }) => {
 
       {repo.features && (
         <div className="project-features">
-          {repo.features.map((feature) => (
-            <span key={feature} className="project-feature-tag">
-              {feature}
-            </span>
-          ))}
-        </div>
-      )}
+    {repo.features.map((feature) => {
+      return (
+        <span key={feature} className="project-feature-tag">
+          {feature}
+        </span>
+      );
+    })}
+  </div>
+)}
 
       <div className="project-footer">
         {repo.techStack && (
