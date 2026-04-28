@@ -23,6 +23,6 @@ export const useScrollReveal = (options = DEFAULT_OPTIONS) => {
     observer.observe(el);
     return () => observer.disconnect();
   }, [options]);
-
+};
   return [ref, isVisible];
 };

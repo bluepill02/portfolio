@@ -23,7 +23,21 @@ const experiences = [
       <span>Designed and distributed premium digital assets on <a href="https://bpmiller02.gumroad.com" target="_blank" rel="noopener noreferrer" style={{color: '#00d4ff', textDecoration: 'none', borderBottom: '1px solid rgba(0, 212, 255, 0.3)'}}>Gumroad</a></span>,
     ],
   },
-  {
+];
+
+const Experience = () => {
+  const [ref, controls] = useScrollReveal();
+
+  return (
+    <section ref={ref} initial="hidden" animate={controls} variants={{ /* variants config */ }}>
+      {experiences.map((exp) => (
+        <ExperienceCard key={exp.date} experience={exp} />
+      ))}
+    </section>
+  );
+};
+
+export default Experience;
     date: '2024 — Present',
     role: 'Data Science & AI (Ongoing)',
     company: 'DataCamp · Online',

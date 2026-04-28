@@ -22,6 +22,8 @@ const RepoCard = ({ repo }) => {
           {repo.features.map((feature) => (
             <span key={feature} className="project-feature-tag">
               {feature}
+const RepoCard = (repo) => {
+  return (
             </span>
           ))}
         </div>
