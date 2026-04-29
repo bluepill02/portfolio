@@ -52,6 +52,8 @@ const Navbar = () => {
               className={`hamburger ${menuOpen ? 'open' : ''}`}
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle menu"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
             >
               <span></span>
               <span></span>
@@ -61,7 +63,13 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+      <div
+        id="mobile-menu"
+        className={`mobile-menu ${menuOpen ? 'open' : ''}`}
+        aria-hidden={!menuOpen}
+        aria-label="Mobile navigation"
+        role="navigation"
+      >
         {navItems.map(item => (
           <a key={item.label} href={item.href} className="nav-link" onClick={handleLinkClick}>
             {item.label}

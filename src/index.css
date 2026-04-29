@@ -1180,6 +1180,54 @@ ul { list-style: none; }
 .hero-anim-5 { animation: heroFadeIn 0.8s ease forwards; animation-delay: 0.9s; opacity: 0; }
 
 /* ================================================================
+   REDUCED MOTION
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-anim-1,
+  .hero-anim-2,
+  .hero-anim-3,
+  .hero-anim-4,
+  .hero-anim-5 {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .ticker-track {
+    animation: none;
+  }
+
+  .hero-orb-1,
+  .hero-orb-2,
+  .hero-orb-3 {
+    animation: none;
+  }
+
+  .hero-scroll-indicator {
+    animation: none;
+  }
+
+  .hire-badge .pulse-dot {
+    animation: none;
+  }
+
+  .role-word {
+    animation: none;
+  }
+}
+
+/* ================================================================
    RESPONSIVE
    ================================================================ */
 @media (max-width: 900px) {

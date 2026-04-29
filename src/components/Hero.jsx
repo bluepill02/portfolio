@@ -38,7 +38,7 @@ const Hero = () => {
           <span className="gradient-text">Srithar</span>
         </h1>
 
-        <p className="hero-role hero-anim-3">
+        <p className="hero-role hero-anim-3" aria-live="polite">
           I build modern web apps with{' '}
           <span key={roleIndex} className="role-word">
             {roles[roleIndex]}
@@ -56,7 +56,7 @@ const Hero = () => {
       </div>
 
       {/* Tech ticker strip */}
-      <div className="ticker-section hero-anim-5">
+      <div className="ticker-section hero-anim-5" aria-hidden="true">
         <div className="ticker-track">
           {[...techs, ...techs].map((tech, i) => (
             <span key={i} className="ticker-item">
