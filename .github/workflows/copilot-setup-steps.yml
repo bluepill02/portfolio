@@ -38,7 +38,7 @@ jobs:
       - name: Setup Xvfb
         uses: coactions/setup-xvfb@v1
         with:
-          run: echo "Xvfb is ready!"
+          run: xvfb-run
           # You can directly run your tests here using: run: npm test
           
       # If you prefer keeping the apt-get approach instead of an external action, 
