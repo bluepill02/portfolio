@@ -38,7 +38,8 @@ jobs:
       - name: Setup Xvfb
         uses: coactions/setup-xvfb@v1
         with:
-          run: xvfb-run
+          run: xvfb-run --auto-servernum google-chrome --headless --disable-gpu --no-sandbox
+
           # You can directly run your tests here using: run: npm test
           
       # If you prefer keeping the apt-get approach instead of an external action, 
