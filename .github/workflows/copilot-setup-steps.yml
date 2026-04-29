@@ -9,9 +9,15 @@ on:
     paths:
       - .github/workflows/copilot-setup-steps.yml
 
+# Cancel in-progress runs for the same branch/PR to save resources
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   copilot-setup-steps:
     runs-on: ubuntu-latest
+    timeout-minutes: 15 # Prevents hanging processes from consuming CI minutes
 
     permissions:
       contents: read
@@ -29,9 +35,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Xvfb for Chrome DevTools
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y xvfb
-          Xvfb :99 -screen 0 1280x720x24 &
-          echo "DISPLAY=:99" >> $GITHUB_ENV
+      - name: Setup Xvfb
+        uses: coactions/setup-xvfb@v1
+        with:
+          run: echo "Xvfb is ready!"
+          # You can directly run your tests here using: run: npm test
+          
+      # If you prefer keeping the apt-get approach instead of an external action, 
+      # a cleaner way to run tests is using xvfb-run:
+      # - name: Run tests with Xvfb
+      #   run: |
+      #     sudo apt-get update -y && sudo apt-get install -y xvfb
+      #     xvfb-run --auto-servernum npm test
