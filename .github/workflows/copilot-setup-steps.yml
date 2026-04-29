@@ -35,8 +35,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Puppeteer Container
-        uses: ianwalter/puppeteer-container@v4.0.0
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v2.1.1
+        with:
+        # Use 'stable' instead of 'true'
+          chrome-version: 'stable'
+        # Ensures Linux libraries are installed so Chrome can actually launch
+          install-dependencies: true
+        # Useful if the agent needs to run Selenium/WebDriver tests
+          install-chromedriver: true
+
+          
            
 
           # You can directly run your tests here using: run: npm test
