@@ -19,8 +19,8 @@ const experiences = [
     company: 'Published as B.P. Miller',
     bullets: [
       'Authored and formatted commercial-grade technical resources and e-books',
-      <span key="amazon">Published developer-focused content and art books on <a href="https://www.amazon.com/stores/B.P.-Miller/author/B0GTPS4DMY" target="_blank" rel="noopener noreferrer" style={{color: '#00d4ff', textDecoration: 'none', borderBottom: '1px solid rgba(0, 212, 255, 0.3)'}}>Amazon</a></span>,
-      <span key="gumroad">Designed and distributed premium digital assets on <a href="https://bpmiller02.gumroad.com" target="_blank" rel="noopener noreferrer" style={{color: '#00d4ff', textDecoration: 'none', borderBottom: '1px solid rgba(0, 212, 255, 0.3)'}}>Gumroad</a></span>,
+      <span key="amazon">Published developer-focused content and art books on <a href="https://www.amazon.com/stores/B.P.-Miller/author/B0GTPS4DMY" target="_blank" rel="noopener noreferrer" className="timeline-link">Amazon</a></span>,
+      <span key="gumroad">Designed and distributed premium digital assets on <a href="https://bpmiller02.gumroad.com" target="_blank" rel="noopener noreferrer" className="timeline-link">Gumroad</a></span>,
     ],
   },
   {
