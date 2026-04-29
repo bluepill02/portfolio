@@ -10,6 +10,16 @@ const RepoGrid = () => {
   const [headerRef, headerVisible] = useScrollReveal();
 
   useEffect(() => {
+    const getCuratedFallback = () =>
+      Object.entries(projectData)
+        .map(([name, entry]) => ({
+          id: name,
+          name,
+          html_url: `https://github.com/bluepill02/${name}`,
+          ...entry,
+        }))
+        .sort((a, b) => a.priority - b.priority);
+
     const loadRepos = async () => {
       try {
         const data = await fetchRepos();
@@ -34,18 +44,12 @@ const RepoGrid = () => {
           })
           .sort((a, b) => a.priority - b.priority);
 
-        setRepos(processedRepos);
+        // fetchRepos() swallows API errors and returns []; fall back to curated
+        // data if no target repos were found in the response.
+        setRepos(processedRepos.length > 0 ? processedRepos : getCuratedFallback());
       } catch (error) {
         console.error('Failed to fetch repos', error);
-        // Fallback: show curated data even if API fails
-        const fallback = Object.entries(projectData).map(([name, data]) => ({
-          id: name,
-          name,
-          html_url: `https://github.com/bluepill02/${name}`,
-          ...data,
-          priority: data.priority,
-        }));
-        setRepos(fallback.sort((a, b) => a.priority - b.priority));
+        setRepos(getCuratedFallback());
       } finally {
         setLoading(false);
       }
